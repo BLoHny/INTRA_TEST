@@ -1,0 +1,22 @@
+version: '3'
+services:
+  www:
+    image: php:apache
+    volumes:
+      - "./:/var/www/html"
+    ports:
+      - 8081:80
+  db:
+    image: mysql:latest
+    environment:
+      - MYSQL_DATABASE=php_docker
+      - MYSQL_USER=php_docker
+      - MYSQL_PASSWORD=password
+      - MYSQL_ALLOW_EMPTY_PASSWORD=1
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 8082:80
+    environment:
+      - PMA_HOST=db
+      - PMA_PORT=3306
